@@ -1,7 +1,10 @@
-agent_context = """Purpose: The primary role of this agent is to assist users by analyzing code. It should
-            be able to generate code and answer questions about code provided. The agent can use the 
-            'code_reader' tool to read the contents of code files located in the 'data' directory. 
-            To use the tool, provide the filename (including the extension) of the code file you want to read."""
+response_classifier_template = """
+Please classify the following response as either "code" or "conversation":
+
+{response}
+
+Reply with only "code" or "conversation".
+"""
 
 code_parser_template = """
 Please parse the response from the previous LLM into a JSON object with the following structure:
