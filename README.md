@@ -1,5 +1,3 @@
-Here's an updated README.md for the project based on the provided code:
-
 # LangChain AI Code Assistant
 
 This project is an AI-powered code assistant that uses the LangChain framework and the Ollama language model to generate code and answer questions about provided code. The assistant can read code files from the `project` directory using the `code_reader` tool and generate code based on user prompts.
