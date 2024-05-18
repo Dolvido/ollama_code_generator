@@ -3,7 +3,6 @@ from langchain.agents import initialize_agent, Tool
 from langchain.agents import AgentType
 from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
-from langchain.utilities import PythonREPL
 from agent_tools import code_reader, file_lister
 from prompts import code_parser_template, response_classifier_template
 from dotenv import load_dotenv
@@ -15,14 +14,8 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 llm = Ollama(model="dolphin2.2-mistral:7b-q6_K")
-python_repl = PythonREPL()
 
 tools = [
-    Tool(
-        name="Documentation",
-        func=python_repl.run,
-        description="For looking up Python documentation and examples of how to use Python libraries/functions."
-    ),
     code_reader,
     file_lister
 ]
@@ -56,7 +49,6 @@ while (user_input := input("Enter a prompt (or 'q' to quit): ")) != "q":
         break
 
     agent_result = agent({"input": user_input})
-    print("Agent result: " + agent_result["output"])
     response_type = response_classifier_chain.run(response=agent_result["output"]).strip().lower()
 
     if response_type == "code":
